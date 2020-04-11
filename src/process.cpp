@@ -12,7 +12,7 @@ using std::string;
 using std::to_string;
 using std::vector;
 
-Process::Process(int pid): pid_(pid){};
+Process::Process(int pid): pid_(pid){ cpu_util_ = Process::CpuUtilization();}
 
 // TODO: Return this process's ID
 int Process::Pid() { return pid_; }
@@ -35,5 +35,4 @@ long int Process::UpTime() { return LinuxParser::UpTime(pid_); }
 // TODO: Overload the "less than" comparison operator for Process objects
 // REMOVE: [[maybe_unused]] once you define the function
 bool Process::operator<(Process const& a) const { 
-    return (std::stof(this->Ram()) > std::stof(a.Ram())); }
-    //return a.CpuUtilization() < this->CpuUtilization();}
+    return cpu_util_ > a.cpu_util_;}
